@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra LORD SCRIPT HUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #0f0f1a;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                transparent 0px,
+                transparent 5px,
+                rgba(83, 52, 131, 0.1) 5px,
+                rgba(83, 52, 131, 0.1) 10px
+            );
+            animation: pixelate 20s linear infinite;
+            pointer-events: none;
+        }
+
+
+
+        @keyframes pixelate {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .neon-text {
+            color: #fff;
+            text-shadow: 0 0 5px #fff,
+                         0 0 15px #9333ea,
+                         0 0 25px #9333ea,
+                         0 0 35px #9333ea;
+            animation: neon 3s ease-in-out infinite alternate, float 6s ease-in-out infinite;
+        }
+
+        @keyframes neon {
+            from { text-shadow: 0 0 5px #fff, 0 0 15px #9333ea; }
+            to { text-shadow: 0 0 5px #fff, 0 0 15px #9333ea, 0 0 25px #9333ea, 0 0 35px #9333ea; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .feature-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            animation: pulse 2s ease-in-out infinite, glow 3s ease-in-out infinite;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.02) rotate(1deg); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(147, 51, 234, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(147, 51, 234, 0.5); }
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+        }
+
+        .feature-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 8px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid rgba(147, 51, 234, 0.4);
+        }
+
+        .copy-button {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #9333ea, #6366f1);
+            border-radius: 8px;
+        }
+
+        .copy-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #6366f1, #9333ea);
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 12px 24px;
+            border-radius: 8px;
+            background: rgba(15, 15, 26, 0.95);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            opacity: 0;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            background: rgba(147, 51, 234, 0.15);
+        }
+
+        .status-working {
+            color: #b366ff;
+        }
+
+        .faq-answer {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .faq-answer.show {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body class="text-white">
+    
+
+    <main class="container mx-auto px-8 pt-32 pb-16">
+        <section class="text-center mb-24">
+            <h1 class="text-7xl font-bold neon-text mb-8">Ultra LORD SCRIPT HUB</h1>
+            <p class="text-3xl text-purple-300 mb-8">POWERFUL OF EXPLOIT SCRIPT HUB</p>
+            <div class="text-2xl text-purple-400 mb-4">⚡ POWER OF ULTRA LORD ⚡</div>
+            <div class="mt-8 glass inline-block px-8 py-4">
+                <span class="text-purple-300 text-xl">🚀 Enhanced Performance & Security</span>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <h2 class="text-5xl font-bold mb-12 text-center neon-text">Proof of Performance</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass p-4 feature-card">
+                    <img src="https://placehold.co/600x400/purple/white?text=Gameplay+Screenshot+1" alt="Gameplay Proof 1" class="w-full h-64 object-cover rounded mb-4">
+                    <p class="text-center text-purple-300">Advanced Features in Action</p>
+                </div>
+                <div class="glass p-4 feature-card">
+                    <img src="https://placehold.co/600x400/purple/white?text=Gameplay+Screenshot+2" alt="Gameplay Proof 2" class="w-full h-64 object-cover rounded mb-4">
+                    <p class="text-center text-purple-300">Performance Showcase</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="mb-24">
+            <h2 class="text-5xl font-bold mb-12 text-center neon-text">Features</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="glass p-10 feature-card">
+                    <div class="text-4xl mb-8"><i class="fas fa-bolt text-purple-400"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">Advanced Exploit</h3>
+                    <p class="mb-6 text-gray-300">Next-level performance optimization</p>
+                    <span class="status-badge status-working">
+                        <i class="fas fa-check-circle mr-2"></i>Working
+                    </span>
+                </div>
+                <div class="glass p-10 feature-card">
+                    <div class="text-4xl mb-8"><i class="fas fa-shield-alt text-purple-400"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">Anti-Detection</h3>
+                    <p class="mb-6 text-gray-300">Advanced security protocols</p>
+                    <span class="status-badge status-working">
+                        <i class="fas fa-check-circle mr-2"></i>Working
+                    </span>
+                </div>
+                <div class="glass p-10 feature-card">
+                    <div class="text-4xl mb-8"><i class="fas fa-tachometer-alt text-purple-400"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">Ultra Core</h3>
+                    <p class="mb-6 text-gray-300">Peak performance engine</p>
+                    <span class="status-badge status-working">
+                        <i class="fas fa-check-circle mr-2"></i>Working
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="script" class="mb-24">
+            <h2 class="text-5xl font-bold mb-12 text-center neon-text">Script</h2>
+            <div class="glass p-10">
+                <pre class="text-purple-400 mb-8"><code>loadstring(game:HttpGet("you-code-yes"))()</code></pre>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <button onclick="copyCode(this)" data-code="loadstring(game:HttpGet('you-code-yes'))()" 
+                            class="copy-button w-full md:w-auto text-white px-10 py-4 rounded font-bold text-lg">
+                        <i class="fas fa-copy mr-3"></i>Copy Script
+                    </button>
+                    <button onclick="downloadScript()" 
+                            class="copy-button w-full md:w-auto text-white px-10 py-4 rounded font-bold text-lg">
+                        <i class="fas fa-download mr-3"></i>Download
+                    </button>
+                    <button onclick="viewRawScript()" 
+                            class="copy-button w-full md:w-auto text-white px-10 py-4 rounded font-bold text-lg">
+                        <i class="fas fa-code mr-3"></i>Raw View
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2 class="text-5xl font-bold mb-12 text-center neon-text">FAQ</h2>
+            <div class="space-y-8">
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">What's new?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        not know its update. for Remake V2 Coming Soon not its V5 so know you can't use it.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Which games are supported?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our script hub supports a wide range of popular Roblox games with specialized features for each one. Regular updates ensure compatibility with the latest game versions.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">What exploits are included?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Ultra LORD includes advanced features like aimbot assistance, ESP visualization, teleportation capabilities, and custom script execution for enhanced gameplay experience.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Is it undetectable?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, our V2 features the most advanced anti-detection system yet, with enhanced security measures and real-time protection to keep your account safe.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Support & Updates</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We provide continuous updates to maintain optimal performance and enhance features. Our community offers dedicated support for any questions or issues.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">How often are scripts updated?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Scripts are updated weekly to ensure compatibility with the latest game versions and to add new features based on community feedback.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">What makes Ultra LORD unique?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Ultra LORD stands out with its advanced performance optimization, user-friendly interface, and comprehensive feature set that includes both basic and advanced exploits.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">How to report issues?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        If you encounter any issues, you can report them through our community support channels. Our team typically responds within 24 hours to resolve any problems.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Are there different versions available?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer different versions optimized for various needs. V2 is our latest and most advanced version with all features unlocked.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">How to use the script?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Simply copy the script from our website, paste it into your exploit, and execute. All features will be instantly available through our user-friendly interface.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">What's the performance impact?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Ultra LORD is optimized for minimal performance impact. Our advanced engine ensures smooth gameplay while maintaining all functionality.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle mr-3 text-purple-400"></i>
+        <span class="text-purple-300">Script copied to clipboard!</span>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuContent = menu.querySelector('.container');
+
+            if (menu.style.transform === 'translateY(0px)') {
+                menu.style.opacity = '0';
+                menu.style.transform = 'translateY(-100%)';
+                menuContent.style.transform = 'translateY(-8px)';
+            } else {
+                menu.style.opacity = '1';
+                menu.style.transform = 'translateY(0px)';
+                menuContent.style.transform = 'translateY(0px)';
+            }
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('.fa-chevron-down');
+            answer.classList.toggle('show');
+            icon.style.transform = answer.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function copyCode(button) {
+            const code = button.getAttribute('data-code');
+            navigator.clipboard.writeText(code);
+            showNotification();
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 2000);
+        }
+
+        function downloadScript() {
+            const code = "loadstring(game:HttpGet('you-code-yes'))()";
+            const blob = new Blob([code], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ultra-lord-script.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function viewRawScript() {
+            const code = "loadstring(game:HttpGet('you-code-yes'))()";
+            const win = window.open('', '_blank');
+            win.document.write('<pre style="word-wrap: break-word; white-space: pre-wrap;">' + code + '</pre>');
+        }
+    </script>
+</body>
+</html>
