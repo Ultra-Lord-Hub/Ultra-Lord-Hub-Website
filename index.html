@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            background: #0f0f1a;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         body::before {
@@ -21,13 +22,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: repeating-linear-gradient(
-                transparent 0px,
-                transparent 5px,
-                rgba(83, 52, 131, 0.1) 5px,
-                rgba(83, 52, 131, 0.1) 10px
-            );
-            animation: pixelate 20s linear infinite;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 40%);
             pointer-events: none;
         }
 
@@ -39,26 +36,35 @@
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .glass:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(147, 51, 234, 0.2);
+            border-color: rgba(147, 51, 234, 0.4);
         }
 
         .neon-text {
             color: #fff;
-            text-shadow: 0 0 5px #fff,
-                         0 0 15px #9333ea,
-                         0 0 25px #9333ea,
-                         0 0 35px #9333ea;
-            animation: neon 3s ease-in-out infinite alternate, float 6s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(147, 51, 234, 0.8),
+                         0 0 20px rgba(147, 51, 234, 0.4),
+                         0 0 30px rgba(147, 51, 234, 0.2);
+            background: linear-gradient(135deg, #fff 0%, #e2d8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         @keyframes neon {
@@ -184,8 +190,22 @@
             <h1 class="text-7xl font-bold neon-text mb-8">Ultra LORD SCRIPT HUB</h1>
             <p class="text-3xl text-purple-300 mb-8">POWERFUL OF EXPLOIT SCRIPT HUB</p>
             <div class="text-2xl text-purple-400 mb-4">⚡ POWER OF ULTRA LORD ⚡</div>
+            <div class="glass p-8 mb-8">
+                <p class="text-xl text-purple-300 mb-4">🔥 Ultimate Performance Optimization</p>
+                <p class="text-xl text-purple-300 mb-4">💪 Strongest Anti-Detection System</p>
+                <p class="text-xl text-purple-300 mb-4">🚀 Weekly Updates & Improvements</p>
+                <p class="text-xl text-purple-300 mb-4">⭐ Premium Features Included</p>
+                <p class="text-xl text-purple-300">🎮 Support for Multiple Games</p>
+            </div>
             <div class="mt-8 glass inline-block px-8 py-4">
                 <span class="text-purple-300 text-xl">🚀 Enhanced Performance & Security</span>
+            </div>
+            
+            <div class="mt-12 glass p-8">
+                <div class="text-4xl font-bold text-purple-400 mb-6">ULTRA LORD HUB v2 vs WAR CAT HUB</div>
+                <div class="text-2xl text-purple-300 mb-4">Score: 5-0</div>
+                <div class="text-xl text-green-400 mb-6">WINS SUKUNA and Gojo (War Cat Hub) Vs Sukuna (Ultra Lord Hub v2)</div>
+                <div class="text-3xl text-purple-400 animate-pulse">EZ EZ EZ EZ L WAR CAT HUB</div>
             </div>
         </section>
 
@@ -234,8 +254,13 @@
         </section>
 
         <section id="script" class="mb-24">
-            <h2 class="text-5xl font-bold mb-12 text-center neon-text">Script</h2>
-            <div class="glass p-10">
+            <h2 class="text-5xl font-bold mb-12 text-center neon-text">Scripts</h2>
+            
+            <!-- Regular Script -->
+            <div class="glass p-10 mb-12">
+                <div class="text-3xl font-bold mb-6 text-center text-purple-300">
+                    <i class="fas fa-code mr-3"></i>Regular Script
+                </div>
                 <pre class="text-purple-400 mb-8"><code>loadstring(game:HttpGet("you-code-yes"))()</code></pre>
                 <div class="flex flex-col md:flex-row gap-4">
                     <button onclick="copyCode(this)" data-code="loadstring(game:HttpGet('you-code-yes'))()" 
@@ -246,10 +271,53 @@
                             class="copy-button w-full md:w-auto text-white px-10 py-4 rounded font-bold text-lg">
                         <i class="fas fa-download mr-3"></i>Download
                     </button>
-                    <button onclick="viewRawScript()" 
-                            class="copy-button w-full md:w-auto text-white px-10 py-4 rounded font-bold text-lg">
-                        <i class="fas fa-code mr-3"></i>Raw View
-                    </button>
+                </div>
+            </div>
+
+            <!-- Premium Script -->
+            <div class="glass p-10">
+                <div class="text-3xl font-bold mb-6 text-center text-yellow-400">
+                    <i class="fas fa-crown mr-3"></i>Premium Script
+                </div>
+                <div class="text-center mb-8">
+                    <p class="text-xl text-purple-300 mb-4">Access our premium features for enhanced gameplay!</p>
+                    <p class="text-gray-300">Join our Discord server to get the premium script</p>
+                </div>
+                <div class="flex justify-center">
+                    <a href="https://discord.gg/HTfAMyDTxX" target="_blank" 
+                       class="copy-button inline-block text-white px-10 py-4 rounded font-bold text-lg">
+                        <i class="fab fa-discord mr-3"></i>Get Premium Access
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="premium" class="mb-24">
+            <h2 class="text-5xl font-bold mb-12 text-center neon-text">Premium Access</h2>
+            <div class="glass p-10 text-center">
+                <div class="text-4xl mb-8"><i class="fas fa-crown text-yellow-400"></i></div>
+                <h3 class="text-3xl font-bold mb-6 text-purple-300">Join Our Discord Server</h3>
+                <p class="text-xl text-gray-300 mb-8">Get exclusive access to premium features and updates!</p>
+                <a href="https://discord.gg/HTfAMyDTxX" target="_blank" 
+                   class="copy-button inline-block text-white px-10 py-4 rounded font-bold text-lg">
+                    <i class="fab fa-discord mr-3"></i>Join Discord Server
+                </a>
+                <div class="mt-8 grid md:grid-cols-3 gap-6">
+                    <div class="glass p-6">
+                        <i class="fas fa-rocket text-2xl text-purple-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-2">Premium Scripts</h4>
+                        <p class="text-gray-300">Access exclusive premium scripts</p>
+                    </div>
+                    <div class="glass p-6">
+                        <i class="fas fa-bell text-2xl text-purple-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-2">Early Updates</h4>
+                        <p class="text-gray-300">Get updates before anyone else</p>
+                    </div>
+                    <div class="glass p-6">
+                        <i class="fas fa-headset text-2xl text-purple-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-2">Priority Support</h4>
+                        <p class="text-gray-300">Direct support from our team</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -318,6 +386,33 @@
                     </div>
                     <div class="faq-answer">
                         Ultra LORD stands out with its advanced performance optimization, user-friendly interface, and comprehensive feature set that includes both basic and advanced exploits.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Why choose Premium?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Premium offers exclusive scripts, early access to updates, priority support, and enhanced features not available in the regular version.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Is there a backup system?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, our script system includes automatic backups and fail-safes to prevent any loss of functionality during updates.
+                    </div>
+                </div>
+                <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">Can I suggest new features?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We welcome feature suggestions from our community. Premium members get priority consideration for their suggestions.
                     </div>
                 </div>
                 <div class="glass p-8 cursor-pointer" onclick="toggleFAQ(this)">
